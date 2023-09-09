@@ -1,3 +1,4 @@
+import Head from "next/head";
 import {
   Carousel,
   initTE,
@@ -10,6 +11,10 @@ export default function Home() {
   ];
   return (
     <div>
+      <Head>
+        <title>Mydemy</title>
+        <link rel="icon" href="../../public/favicon.ico" sizes="any" />
+      </Head>
       <div className='bg-white flex justify-between px-3'>
        <div className='flex items-center p-2 space-x-5'>
         <a href="/" className='text-xl'>Mydemy</a>

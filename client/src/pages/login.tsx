@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import axios from 'axios'
+import Head from "next/head";
 
 const Login = () => {
     const [email,setEmail]= useState('')
     const [password,setPassword] = useState('')
-    const submit = (e)=>{
+    const submit = (e:FormEvent)=>{
       e.preventDefault() 
       axios.post('/login')
            .then(res=>{
@@ -16,8 +17,9 @@ const Login = () => {
     }
     return ( 
     <div>
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full">
+      <Head><title>login - Mydemy</title></Head>
+      <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md w-full bg-white p-5 rounded-xl">
         <div>
         <h2 className="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
           Sign in to your account
@@ -53,7 +55,7 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="my-6">
           <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary focus:outline-none focus:border-primary focus:shadow-outline-primary transition duration-150 ease-in-out">
             <span className="absolute left-0 inset-y pl-3">
               <svg className="h-5 w-5 text-primary transition ease-in-out duration-150" fill="currentColor" viewBox="0 0 20 20">
