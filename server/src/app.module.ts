@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
-    type: 'postgres',
+    type: 'mongodb',
     database: 'mydemy',
     entities: ['dist/**/*/entity.ts'],
     // synchronize: true
