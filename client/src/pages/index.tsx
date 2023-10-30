@@ -1,14 +1,19 @@
 import Head from "next/head";
-import {
-  Carousel,
-  initTE,
-} from "tw-elements";
+import { FormEvent, useState } from "react";
+import {useRouter} from 'next/router'
 
 export default function Home() {
+  const router = useRouter()
   const categories=[
     {id:1,name:'Course'},
     {id:2,name:'Teacher'}
   ];
+  const [category,setCategory]=useState('');
+  const [query,setQuery]=useState('');
+  const search =(e:FormEvent)=>{
+    e.preventDefault()
+    router.push(`search?category=${category}&query=${query}`)
+  }
   return (
     <div>
       <Head>
@@ -18,20 +23,22 @@ export default function Home() {
       <div className='bg-white flex justify-between px-3'>
        <div className='flex items-center p-2 space-x-5'>
         <a href="/" className='text-xl'>Mydemy</a>
+        <form onSubmit={search}>
           <div className="mx-3 p-1 rounded-3xl bg-gray-200 px-5 border-2 border-primary flex items-stretch">
-            <select v-model="categoryId" required className="bg-gray-200 px-5">
+            <select onChange={(e)=>setCategory(e.target.value)} v-model="categoryId" required className="bg-gray-200 px-5">
               <option value="all">Any</option>
               {categories.map((category:any)=>(
-                <option key={category.id}>{category.name}</option>
+                <option key={category.id} value={category.name}>{category.name}</option>
               ))}
             </select>
-            <input type="text" required placeholder="search anything" className="px-2 bg-gray-200 w-60 rounded outline-none placeholder-gray-700"/>
+            <input type="text" onChange={(e)=>setQuery(e.target.value)} required placeholder="search anything" className="px-2 bg-gray-200 w-60 rounded outline-none placeholder-gray-700"/>
             <button type="submit" className="text-primary text-xl bg-gray-200 lg:mx-1 xl:mx-1 2xl:mx-1">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             </button>
           </div>
+        </form>
            <a href="/business" className='font-bold'>Business</a>
            <a href="/teach" className='font-bold'>Teach</a> 
         </div>
@@ -84,12 +91,12 @@ export default function Home() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="h-6 w-6">
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M15.75 19.5L8.25 12l7.5-7.5" />
           </svg>
         </span>
@@ -106,12 +113,12 @@ export default function Home() {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="h-6 w-6">
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
         </span>
@@ -126,8 +133,8 @@ export default function Home() {
         <h1 className='text-2xl font-bold'>A broad selection of courses</h1>
         <p className='text-xl'>Choose from over 1000 online video courses with new additions published every month</p>
       </div>
-      <div className='flex bg-white my-5 mx-5'>
-        <div className='p-5 flex flex-col space-y-3 justify-center'>
+      <div className='flex items-stretch flex-wrap bg-white my-5 mx-5'>
+        <div className='lg:w-1/2 p-5 flex flex-col space-y-3 justify-center'>
            <h1 className='text-2xl font-bold'>Upskill your team with Our Business</h1>
            <ul style={{listStyle:"circle inside black"}} className='text-xl'>
             <li>Unlimited access to 1000+ top Our courses, anytime, anywhere</li>
@@ -136,12 +143,12 @@ export default function Home() {
            </ul>
         </div>
         <img src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=400" 
-        className='w-1/2 h-96' alt="" />
+        className='lg:w-1/2' alt="" />
       </div>
-      <div className='flex bg-white my-5 mx-5'>
+      <div className='flex flex-wrap bg-white my-5 mx-5'>
         <img src="https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=400" 
-        className='w-1/2 h-96' alt="" />
-        <div className='w-1/2 p-5 flex flex-col space-y-3 justify-center'>
+        className='lg:w-1/2 h-96' alt="" />
+        <div className='lg:w-1/2 p-5 flex flex-col space-y-3 justify-center'>
            <h1 className='text-2xl font-bold'>Become an instructor</h1>
            <p className='text-xl'>Instructors from around the world teach millions of students on Our. We provide the tools and skills to teach what you love.</p>
         </div>
