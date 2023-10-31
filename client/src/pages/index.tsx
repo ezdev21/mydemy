@@ -2,7 +2,7 @@ import Head from "next/head";
 import { FormEvent, useState } from "react";
 import {useRouter} from 'next/router'
 
-export default function Home() {
+const Home = () => {
   const router = useRouter()
   const categories=[
     {id:1,name:'Course'},
@@ -159,3 +159,4 @@ export default function Home() {
   </div>
   )
 }
+export default Home;

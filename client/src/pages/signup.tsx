@@ -2,10 +2,10 @@ import Head from "next/head";
 import { FormEvent, useState } from "react";
 
 const Signup = () => {
-    const [name,setName] = useState('')
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
-    const [passwordConfirmation,setPasswordConfirmation] = useState('')
+    const [name,setName] = useState<string>('')
+    const [email,setEmail] = useState<string>('')
+    const [password,setPassword] = useState<string>('')
+    const [passwordConfirmation,setPasswordConfirmation] = useState<string>('')
     const signup = (e:FormEvent)=>{
       e.preventDefault()
     }

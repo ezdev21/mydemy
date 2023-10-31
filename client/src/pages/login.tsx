@@ -3,17 +3,17 @@ import axios from 'axios'
 import Head from "next/head";
 
 const Login = () => {
-    const [email,setEmail]= useState('')
-    const [password,setPassword] = useState('')
+    const [email,setEmail]= useState<string>('')
+    const [password,setPassword] = useState<string>('')
     const submit = (e:FormEvent)=>{
       e.preventDefault() 
       axios.post('/login')
-           .then(res=>{
-             
-           })
-           .catch(err=>{
-              
-           })
+      .then(res=>{
+        
+      })
+      .catch(err=>{
+        
+      })
     }
     return ( 
     <div>
