@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState,useEffect } from "react";
+import axios from '../libs/axios'
 
 const Search = () =>{
   const router = useRouter()
@@ -11,7 +11,7 @@ const Search = () =>{
   useEffect(() => {
     setCategory(router.query.category)
     setQuery(router.query.query) 
-   axios.get('http://localhost:4000/search',{data:{category,query}})
+   axios.get('/search',{data:{category,query}})
    .then(res=>{
       setItems(res.data)
    })
