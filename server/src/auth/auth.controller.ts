@@ -13,9 +13,9 @@ export class AuthController {
     return newUSer
   }
 
-  @Post('signin')
-  async signIn(@Body() { email, password }: CreateAuthDto) {
-    const token = await this.authService.signIn(email, password)
+  @Post('login')
+  async logIn(@Body() { email, password }: CreateAuthDto) {
+    const token = await this.authService.logIn(email, password)
     return token
   }
 

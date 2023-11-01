@@ -1,13 +1,33 @@
+import { useRouter } from 'next/router'
 import Head from "next/head";
 import { FormEvent, useState } from "react";
+import axios from '../libs/axios'
 
 const Signup = () => {
+    const router = useRouter()
     const [name,setName] = useState<string>('')
+    const [username,setUserName] = useState<string>('')
     const [email,setEmail] = useState<string>('')
     const [password,setPassword] = useState<string>('')
     const [passwordConfirmation,setPasswordConfirmation] = useState<string>('')
     const signup = (e:FormEvent)=>{
       e.preventDefault()
+      const data = {
+        name,username,email,password
+      }
+      axios.post('/auth/signup',data)
+      .then(res=>{
+        console.log(res)
+        if(res.status==201){
+          router.push("/login");
+        }
+        else{
+
+        }
+      })
+      .catch(err=>{
+        console.log(err)
+      }) 
     }
     return ( 
       <div>
@@ -32,6 +52,14 @@ const Signup = () => {
                   Name
                 </label>
                 <input onChange={(e)=>setName(e.target.value)} className="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" id="grid-first-name" type="text" placeholder="Jane" name="name" required/>
+              </div>
+            </div>
+            <div className="flex flex-wrap -mx-3 my-3">
+              <div className="w-full px-3 mb-2 md:mb-0">
+                <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-user">
+                  Username
+                </label>
+                <input onChange={(e)=>setUserName(e.target.value)} className="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300 focus:z-10" id="grid-username" type="text" placeholder="Jane123" name="username" required/>
               </div>
             </div>
             <div className="flex flex-wrap -mx-3 my-3">
