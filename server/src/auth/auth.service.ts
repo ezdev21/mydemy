@@ -1,37 +1,24 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private jwt:JwtService,){
-    //@InjectRepository(User) private userRepository:Repository<User>
-  }
+  constructor(private prisma: PrismaService, private jwtService:JwtService,){}
 
   async signUp(authDto:CreateAuthDto){
-
+    //return this.prisma.user.create({data:{authDto}})
   }
 
-  async signIn(authDto:CreateAuthDto){
-    //const user=this.userRepository.findOne(authDto.id)
-    // if(!user){
-    //   throw new ForbiddenException('These credentials do not match our records.')
-    // }
-    //const pwMatches=argon.verify(user.hash,authDto.password)
-    // if(!pwMatches){
-    //   throw new ForbiddenException('These credentials do not match our records.')
-    // }
-    // delete user.hash
-    // return this.signToken(user.id,user.email)
+  async signIn(email:string,password:string){
+    const user = await this.prisma.user.findUnique({ where: { email: email } })
+    if (!user || user.password != password) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
+    return {
+      token: this.jwtService.sign({ userId: user.id }),
+    };
   }
-  
-  signToken(userId:number,email:string){
-    const payload = {sub:userId,email}
-    const token=this.jwt.signAsync(payload,{
-      expiresIn:'2h',
-      secret:process.env.JWT_SECRET
-    });
-    //return {access_token:token}
-  }
+
 }
