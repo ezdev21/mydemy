@@ -1,8 +1,10 @@
 import { FormEvent, useState } from "react";
 import Head from "next/head";
 import axios from '../libs/axios'
+import { useRouter } from "next/router";
 
 const Login = () => {
+    const router = useRouter()
     const [email,setEmail]= useState<string>('')
     const [password,setPassword] = useState<string>('')
     const submit = (e:FormEvent)=>{
@@ -12,7 +14,10 @@ const Login = () => {
       }
       axios.post('/auth/login',data)
       .then(res=>{
-        console.log(res.data)
+        if(res.status==200){
+          localStorage.setItem('token',res.data.token)
+          router.push("/dashboard");
+        }
       })
       .catch(err=>{
         console.log(err)

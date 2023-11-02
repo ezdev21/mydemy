@@ -18,5 +18,10 @@
 
 body {
   color: #444;
-  background: #d6d4d4;
+  background: #e5e3e3;
+}
+
+input:focus{
+  border: 2px #8bbe1b solid !important;
+  box-sizing: border-box;
 }
