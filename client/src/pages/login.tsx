@@ -1,19 +1,22 @@
 import { FormEvent, useState } from "react";
-import axios from 'axios'
 import Head from "next/head";
+import axios from '../libs/axios'
 
 const Login = () => {
     const [email,setEmail]= useState<string>('')
     const [password,setPassword] = useState<string>('')
     const submit = (e:FormEvent)=>{
       e.preventDefault() 
-      axios.post('/login')
+      const data = {
+        email,password
+      }
+      axios.post('/auth/login',data)
       .then(res=>{
-        
+        console.log(res.data)
       })
       .catch(err=>{
-        
-      })
+        console.log(err)
+      }) 
     }
     return ( 
     <div>
@@ -43,7 +46,7 @@ const Login = () => {
         </div>
         <div className="mt-6 flex items-center justify-between">
           <div className="flex items-center">
-            <input v-model="remember" type="checkbox" className="form-checkbox h-4 w-4 text-primary transition duration-150 ease-in-out" />
+            <input v-model="remember" type="checkbox" className="form-checkbox h-4 w-4 text-primary bg-primary transition duration-150 ease-in-out" />
             <label htmlFor="remember_me" className="ml-2 block text-sm leading-5 text-gray-900">
               Remember me
             </label>
