@@ -12,11 +12,11 @@ export class InstructorService {
   }
 
   findAll() {
-    return this.prisma.instructor.findMany();
+    return this.prisma.instructor.findMany()
   }
 
   findOne(id: string) {
-    return this.prisma.instructor.findUnique({where:{id:id}});
+    return this.prisma.instructor.findUnique({where:{id:id}})
   }
 
   update(id: string, updateInstructorDto: UpdateInstructorDto) {
@@ -27,6 +27,6 @@ export class InstructorService {
   }
 
   remove(id: string) {
-    return this.prisma.instructor.delete({where:{id:id}});
+    return this.prisma.instructor.delete({where:{id:id}})
   }
 }
