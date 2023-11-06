@@ -4,6 +4,7 @@ import axios from '../libs/axios'
 
 const Search = () =>{
   const router = useRouter()
+  const [type,setType] = useState<any>('')
   const [category,setCategory] = useState<any>('')
   const [query,setQuery] = useState<any>('')
   const [items,setItems] = useState<Array<Object>|null>([])
@@ -11,7 +12,7 @@ const Search = () =>{
   useEffect(() => {
     setCategory(router.query.category)
     setQuery(router.query.query) 
-   axios.get('/search',{data:{category,query}})
+   axios.get('/search',{data:{type,category,query}})
    .then(res=>{
       setItems(res.data)
    })

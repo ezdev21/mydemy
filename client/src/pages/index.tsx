@@ -1,18 +1,28 @@
 import Head from "next/head";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import {useRouter} from 'next/router'
+import axios from '../libs/axios'
 
 const Home = () => {
   const router = useRouter()
-  const categories=[
-    {id:1,name:'Course'},
-    {id:2,name:'Teacher'}
-  ];
-  const [category,setCategory]=useState('');
-  const [query,setQuery]=useState('');
+  const [type,setType]=useState<string>('');
+  const [categories,setCategories] = useState<Array<Object>|null>([])
+  const [category,setCategory]=useState<string>('');
+  const [query,setQuery]=useState<string>('');
+
+  useEffect(()=>{
+    axios.post('/category')
+    .then(res=>{
+     setCategories(res.data)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  })
+
   const search =(e:FormEvent)=>{
     e.preventDefault()
-    router.push(`search?category=${category}&query=${query}`)
+    router.push(`search?type=${type}category=${category}&query=${query}`)
   }
   return (
     <div>
@@ -25,9 +35,14 @@ const Home = () => {
         <a href="/" className='text-xl'>Mydemy</a>
         <form onSubmit={search}>
           <div className="mx-3 p-1 rounded-3xl bg-gray-200 px-5 border-2 border-primary flex items-stretch">
+            <select onChange={(e)=>setType(e.target.value)} v-model="categoryId" required className="bg-gray-200 px-5">
+              <option value="" disabled>Any</option>
+              <option value="course">Course </option>
+              <option value="instructor">Instructor</option>
+            </select>
             <select onChange={(e)=>setCategory(e.target.value)} v-model="categoryId" required className="bg-gray-200 px-5">
-              <option value="all">Any</option>
-              {categories.map((category:any)=>(
+              <option value="all" disabled>Category</option>
+              {categories?.map((category:any)=>(
                 <option key={category.id} value={category.name}>{category.name}</option>
               ))}
             </select>
