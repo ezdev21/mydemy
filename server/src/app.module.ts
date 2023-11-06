@@ -8,9 +8,10 @@ import { SearchModule } from './search/search.module';
 import { InstructorModule } from './instructor/instructor.module';
 import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, SearchModule, InstructorModule, StudentModule, CourseModule],
+  imports: [UsersModule, AuthModule, SearchModule, InstructorModule, StudentModule, CourseModule, CategoryModule],
   controllers: [AppController],
   providers: [AppService,PrismaService],
 })

@@ -29,7 +29,7 @@ model Instructor {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  userId    String?  @db.ObjectId
   courses   Course[]
 
   @@map("instructors")
@@ -40,7 +40,7 @@ model Student {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  userId    String?  @db.ObjectId
   Course    Course?  @relation(fields: [courseId], references: [id])
   courseId  String?  @db.ObjectId
 
@@ -52,8 +52,20 @@ model Course {
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   instructor   Instructor? @relation(fields: [instructorId], references: [id])
-  instructorId String?
+  instructorId String?     @db.ObjectId
+  category     Category?   @relation(fields: [categoryId], references: [id])
+  categoryId   String?     @db.ObjectId
   students     Student[]
 
   @@map("courses")
+}
+
+model Category {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  courses   Course[]
+
+  @@map("categories")
 }
