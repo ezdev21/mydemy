@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { FormEvent, useState, useEffect } from "react";
 import {useRouter} from 'next/router'
-import axios from '../libs/axios'
+import api from '../libs/api'
 import CarouselDefault from "../components/carousel";
 const Home = () => {
   const router = useRouter()
@@ -11,7 +11,7 @@ const Home = () => {
   const [query,setQuery]=useState<string>('');
 
   useEffect(()=>{
-    axios.post('/category')
+    api.post('/category')
     .then(res=>{
      setCategories(res.data)
     })

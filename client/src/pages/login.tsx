@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import Head from "next/head";
-import axios from '../libs/axios'
+import api from '../libs/api'
 import { useRouter } from "next/router";
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
       const data = {
         email,password
       }
-      axios.post('/auth/login',data)
+      api.post('/auth/login',data)
       .then(res=>{
         if(res.status==200){
           localStorage.setItem('token',res.data.token)

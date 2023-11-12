@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { useState,useEffect } from "react";
-import axios from '../libs/axios'
+import api from '../libs/api'
 
 const Search = () =>{
   const router = useRouter()
@@ -12,7 +12,7 @@ const Search = () =>{
   useEffect(() => {
     setCategory(router.query.category)
     setQuery(router.query.query) 
-   axios.get('/search',{data:{type,category,query}})
+   api.get('/search',{data:{type,category,query}})
    .then(res=>{
       setItems(res.data)
    })
