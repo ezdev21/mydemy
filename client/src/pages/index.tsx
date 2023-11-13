@@ -35,12 +35,12 @@ const Home = () => {
         <a href="/" className='text-xl'>Mydemy</a>
         <form onSubmit={search}>
           <div className="mx-3 p-1 rounded-3xl bg-gray-200 px-5 border-2 border-primary flex items-stretch">
-            <select onChange={(e)=>setType(e.target.value)} v-model="categoryId" className="bg-gray-200 px-5">
+            <select onChange={(e)=>setType(e.target.value)} className="bg-gray-200 px-5">
               <option value="">Any</option>
               <option value="course">Course </option>
               <option value="instructor">Instructor</option>
             </select>
-            <select onChange={(e)=>setCategory(e.target.value)} v-model="categoryId" className="bg-gray-200 px-5">
+            <select onChange={(e)=>setCategory(e.target.value)} className="bg-gray-200 px-5">
               <option value="all">Category</option>
               {categories?.map((category:any)=>(
                 <option key={category.id} value={category.name}>{category.name}</option>

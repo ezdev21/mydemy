@@ -12,7 +12,7 @@ api.interceptors.request.use(
       if (config.headers) config.headers.token = accessToken
     }
     else{
-      window.location = '/login'
+      //window.location = '/login'
     }
     return config
   },
