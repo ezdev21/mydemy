@@ -9,21 +9,28 @@ export class UsersService {
   constructor(private prisma: PrismaService, private jwtService: JwtService ){}
 
   create(createUserDto: CreateUserDto) {
-    
+    return this.prisma.user.create({data:createUserDto})
   }
 
   findAll() {
     return this.prisma.user.findMany()
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
+    const user = this.prisma.user.findUnique({where:{id:id}})
+    delete user.password
+    return user
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.findOne(id)
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    this.prisma.user.update({
+      where:{id:id},
+      data:updateUserDto
+    })
+
   }
 
-  async remove(id: number) {
-    const user = await this.findOne(id)
+  async remove(id: string) {
+    this.prisma.user.delete({where:{id:id}})
   }
 }
