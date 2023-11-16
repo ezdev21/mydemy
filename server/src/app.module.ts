@@ -9,9 +9,10 @@ import { InstructorModule } from './instructor/instructor.module';
 import { StudentModule } from './student/student.module';
 import { CourseModule } from './course/course.module';
 import { CategoryModule } from './category/category.module';
+import { LectureModule } from './lecture/lecture.module';
 
 @Module({
-  imports: [UsersModule, AuthModule, SearchModule, InstructorModule, StudentModule, CourseModule, CategoryModule],
+  imports: [UsersModule, AuthModule, SearchModule, InstructorModule, StudentModule, CourseModule, CategoryModule, LectureModule],
   controllers: [AppController],
   providers: [AppService,PrismaService],
 })
