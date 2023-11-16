@@ -57,7 +57,7 @@ model Course {
   category     Category?   @relation(fields: [categoryId], references: [id])
   categoryId   String?     @db.ObjectId
   students     Student[]
-  Lecture      Lecture[]
+  lectures     Lecture[]
 
   @@map("courses")
 }
@@ -73,17 +73,26 @@ model Category {
 }
 
 model Lecture {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  title String
-
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  content      String
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
   instructor   Instructor? @relation(fields: [instructorId], references: [id])
   instructorId String?     @db.ObjectId
   course       Course?     @relation(fields: [courseId], references: [id])
   courseId     String?     @db.ObjectId
-  //video     Video?   @relation(fields: [videoId], references: [id])
+  video        Video?      @relation(fields: [videoId], references: [id])
   videoId      String?     @db.ObjectId
 
   @@map("lectures")
+}
+
+model Video {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Lecture   Lecture[]
+
+  @@map("videos")
 }
