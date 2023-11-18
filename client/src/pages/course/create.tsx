@@ -63,8 +63,8 @@ const Create = ()=>{
                 <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="category">
                   Category*
                 </label>
-                <select onChange={(e)=>setCategory(e.target.value)} required className="focus:outline-none focus:outline-shadow-blue focus:border-blue-300 focus:z-10 bg-white appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight" name="category" id="category">
-                  <option value="any" disabled className="text-gray-700">Category</option>
+                <select onChange={(e)=>setCategory(e.target.value)} className="focus:outline-none focus:outline-shadow-blue focus:border-blue-300 focus:z-10 bg-white appearance-none block w-full border rounded py-3 px-4 mb-3 leading-tight" name="category" id="category">
+                  <option value="any" selected className="text-gray-700">Category</option>
                   {categories?.map((category:any)=>(
                      <option className="text-gray-700" key={category.id} value={category.id}>{category.name}</option>      
                   ))}
