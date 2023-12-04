@@ -16,7 +16,7 @@ const Create = ()=>{
     .catch(err=>{
       console.log(err)
     })
-  })
+  },[])
   const createCourse = (e:FormEvent)=>{
     e.preventDefault()
     const data = {title,description,category,thumbnail}

@@ -12,14 +12,14 @@ const Search = () =>{
   useEffect(() => {
     setCategory(router.query.category)
     setQuery(router.query.query) 
-   api.get('/search',{data:{type,category,query}})
-   .then(res=>{
-      setItems(res.data)
-   })
-   .catch(err=>{
-     console.log(err)
-   })
-  });
+    api.get('/search',{data:{type,category,query}})
+    .then(res=>{
+        setItems(res.data)
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  },[]);
 
   return(
     <div>

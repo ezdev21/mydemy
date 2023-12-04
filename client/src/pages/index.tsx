@@ -18,7 +18,7 @@ const Home = () => {
     .catch(err=>{
       console.log(err)
     })
-  })
+  },[])
 
   const search =(e:FormEvent)=>{
     e.preventDefault()

@@ -25,7 +25,7 @@ import { useEffect } from "react"
             slides.children[newIndex].dataset.active = true
             delete activeSlide?.dataset.active
         },4000)
-    })
+    },[])
     }
   return (
     <div className="carousel  text-4xl text-white" data-carousel>
