@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-toastify';
 
 const api = axios.create({
     baseURL: 'http://localhost:4000/'
@@ -27,7 +28,19 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    if(error.response.status === 401) {
+    if(!error.response){
+      toast.error('Connection Error', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+    if(error.response?.status === 401) {
       window.location = '/login'
     }
     return Promise.reject(error)

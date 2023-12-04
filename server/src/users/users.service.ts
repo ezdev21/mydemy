@@ -16,9 +16,9 @@ export class UsersService {
     return this.prisma.user.findMany()
   }
 
-  findOne(id: string) {
-    const user = this.prisma.user.findUnique({where:{id:id}})
-    delete user.password
+  async findOne(id: string) {
+    const user = await this.prisma.user.findUnique({where:{id:id}})
+    await delete user.password
     return user
   }
 

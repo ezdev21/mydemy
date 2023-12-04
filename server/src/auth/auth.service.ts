@@ -15,7 +15,7 @@ export class AuthService {
     if (!user || user.password != password) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    delete user.password
+    await delete user.password
     return {
       user,
       token: this.jwtService.sign({ userId: user.id }),
